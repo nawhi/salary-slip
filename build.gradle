@@ -1,9 +1,5 @@
 apply plugin: 'java'
 
-group = 'com.codurance'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 10
-
 repositories {
     mavenCentral()
 }
@@ -22,6 +18,8 @@ dependencies {
 }
 
 test {
+    useJUnitPlatform()
+    
     testLogging {
         exceptionFormat = 'full'
         events = ["passed", "failed", "skipped"]
@@ -36,7 +34,6 @@ sourceSets {
         runtimeClasspath = output + compileClasspath + configurations.acceptanceRuntime
     }
 }
-
 
 configurations {
     acceptanceCompile.extendsFrom testCompile
