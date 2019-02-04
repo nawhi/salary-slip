@@ -36,24 +36,19 @@ test {
     }
 }
 
-configurations {
-    acceptanceCompile.extendsFrom testCompile
-    acceptanceRuntime.extendsFrom testRuntime
-}
-
 sourceSets {
-    main {
-        java.srcDir file("src/main/java")
-    }
-    test {
-        java.srcDir file("src/test/java")
-    }
     acceptance {
         java.srcDir file("src/acceptance/java")
         resources.srcDir file('src/acceptance/resources')
         compileClasspath = sourceSets.main.output + sourceSets.test.output + configurations.acceptanceCompile
         runtimeClasspath = output + compileClasspath + configurations.acceptanceRuntime
     }
+}
+
+
+configurations {
+    acceptanceCompile.extendsFrom testCompile
+    acceptanceRuntime.extendsFrom testRuntime
 }
 
 task acceptanceTest(type: Test) {
