@@ -1,15 +1,68 @@
 apply plugin: 'java'
 
+group = 'com.codurance'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 10
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'com.eclipsesource.minimal-json', name: 'minimal-json', version: '0.9.5'
+
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.1'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.3.1'
     testCompile group: 'org.easytesting', name: 'fest-assert', version: '1.4'
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.2.0'
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
     testCompile group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.0'
 }
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'com.codurance.salaryslip.Main'
+        )
+    }
+}
+
+test {
+    testLogging {
+        exceptionFormat = 'full'
+        events = ["passed", "failed", "skipped"]
+    }
+}
+
+configurations {
+    acceptanceCompile.extendsFrom testCompile
+    acceptanceRuntime.extendsFrom testRuntime
+}
+
+sourceSets {
+    main {
+        java.srcDir file("src/main/java")
+    }
+    test {
+        java.srcDir file("src/test/java")
+    }
+    acceptance {
+        java.srcDir file("src/acceptance/java")
+        resources.srcDir file('src/acceptance/resources')
+        compileClasspath = sourceSets.main.output + sourceSets.test.output + configurations.acceptanceCompile
+        runtimeClasspath = output + compileClasspath + configurations.acceptanceRuntime
+    }
+}
+
+task acceptanceTest(type: Test) {
+    description = 'Runs tests in src/acceptance directory only'
+    group = 'verification'
+    testClassesDirs = sourceSets.acceptance.output.classesDirs
+    classpath = sourceSets.acceptance.runtimeClasspath
+    mustRunAfter test
+}
+
+check.dependsOn acceptanceTest
 
