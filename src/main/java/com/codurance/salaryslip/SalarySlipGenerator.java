@@ -11,6 +11,6 @@ class SalarySlipGenerator {
     }
 
     private BigDecimal getMonthlySalary(BigDecimal annualSalary) {
-        return annualSalary.divide(BigDecimal.valueOf(12), RoundingMode.UNNECESSARY);
+        return annualSalary.divide(BigDecimal.valueOf(12), 2, RoundingMode.CEILING);
     }
 }
