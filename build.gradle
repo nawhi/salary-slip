@@ -10,6 +10,7 @@ dependencies {
     compile group: 'com.eclipsesource.minimal-json', name: 'minimal-json', version: '0.9.5'
 
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.3.1'
     testCompile group: 'org.easytesting', name: 'fest-assert', version: '1.4'
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.2.0'
@@ -25,28 +26,4 @@ test {
         events = ["passed", "failed", "skipped"]
     }
 }
-
-sourceSets {
-    acceptance {
-        java.srcDir file("src/acceptance/java")
-        resources.srcDir file('src/acceptance/resources')
-        compileClasspath = sourceSets.main.output + sourceSets.test.output + configurations.acceptanceCompile
-        runtimeClasspath = output + compileClasspath + configurations.acceptanceRuntime
-    }
-}
-
-configurations {
-    acceptanceCompile.extendsFrom testCompile
-    acceptanceRuntime.extendsFrom testRuntime
-}
-
-task acceptanceTest(type: Test) {
-    description = 'Runs tests in src/acceptance directory only'
-    group = 'verification'
-    testClassesDirs = sourceSets.acceptance.output.classesDirs
-    classpath = sourceSets.acceptance.runtimeClasspath
-    mustRunAfter test
-}
-
-check.dependsOn acceptanceTest
 

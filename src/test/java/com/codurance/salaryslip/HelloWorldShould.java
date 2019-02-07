@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class AT_SanityCheck {
+class HelloWorldShould {
 
     @Test
-    void blah() {
-        assertEquals("Not This", HelloWorld.message());
+    void have_correct_message() {
+        assertEquals("Hello World", HelloWorld.message());
     }
 }
