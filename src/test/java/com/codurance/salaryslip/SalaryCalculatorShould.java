@@ -3,9 +3,6 @@ package com.codurance.salaryslip;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.math.BigDecimal;
-
-import static java.math.RoundingMode.CEILING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SalaryCalculatorShould {
@@ -17,17 +14,10 @@ class SalaryCalculatorShould {
             "5000,416.67"
     })
     void calculate_gross_salary_per_month_for_an_employee(int annualSalary, double expectedMonthlySalary) {
-        SalaryCalculator calculator = new SalaryCalculator(BigDecimal.valueOf(annualSalary));
+        SalaryCalculator calculator = new SalaryCalculator(new Money(annualSalary));
 
-        BigDecimal actualMonthlySalary = calculator.invoke();
+        Money actualMonthlySalary = calculator.invoke();
 
-        assertBigDecimalsEqual(BigDecimal.valueOf(expectedMonthlySalary), actualMonthlySalary);
+        assertEquals(new Money(expectedMonthlySalary), actualMonthlySalary);
     }
-
-    private void assertBigDecimalsEqual(BigDecimal a, BigDecimal b) {
-        BigDecimal scaledB = b.setScale(2, CEILING);
-        BigDecimal scaledA = a.setScale(2, CEILING);
-        assertEquals(0, scaledA.compareTo(scaledB));
-    }
-
 }

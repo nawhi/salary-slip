@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 class SalarySlipGenerator {
 
     SalarySlip generateFor(Employee employee) {
-        BigDecimal annualSalary = employee.getAnnualSalary();
-        return new SalarySlip(employee, new SalaryCalculator(annualSalary).invoke());
+        Money annualSalary = employee.getAnnualSalary();
+        return new SalarySlip(employee, new Money(755.00), new SalaryCalculator(annualSalary).invoke());
     }
 
 }

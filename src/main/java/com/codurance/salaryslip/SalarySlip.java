@@ -1,20 +1,13 @@
 package com.codurance.salaryslip;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class SalarySlip {
     private final Employee employee;
-    private final BigDecimal monthlyGrossSalary;
-    private final BigDecimal nationalInsuranceContribution;
+    private final Money monthlyGrossSalary;
+    private final Money nationalInsuranceContribution;
 
-    SalarySlip(Employee employee, BigDecimal monthlyGrossSalary) {
-        this.employee = employee;
-        this.monthlyGrossSalary = monthlyGrossSalary;
-        this.nationalInsuranceContribution = BigDecimal.valueOf(0);
-    }
-
-    public SalarySlip(Employee employee, BigDecimal monthlyGrossSalary, BigDecimal nationalInsuranceContribution) {
+    SalarySlip(Employee employee, Money monthlyGrossSalary, Money nationalInsuranceContribution) {
         this.employee = employee;
         this.monthlyGrossSalary = monthlyGrossSalary;
         this.nationalInsuranceContribution = nationalInsuranceContribution;
@@ -26,8 +19,8 @@ public class SalarySlip {
         if (o == null || getClass() != o.getClass()) return false;
         SalarySlip that = (SalarySlip) o;
         return Objects.equals(employee, that.employee) &&
-                (monthlyGrossSalary.compareTo(that.monthlyGrossSalary) == 0) &&
-                (nationalInsuranceContribution.compareTo(that.nationalInsuranceContribution) == 0);
+                monthlyGrossSalary.equals(that.monthlyGrossSalary) &&
+                nationalInsuranceContribution.equals(that.nationalInsuranceContribution);
     }
 
     @Override

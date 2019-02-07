@@ -1,13 +1,11 @@
 package com.codurance.salaryslip;
 
-import java.math.BigDecimal;
-
 public class Employee {
     private final String name;
     private final int id;
-    private final BigDecimal annualSalary;
+    private final Money annualSalary;
 
-    Employee(String name, int id, BigDecimal annualSalary) {
+    Employee(String name, int id, Money annualSalary) {
         this.name = name;
         this.id = id;
         this.annualSalary = annualSalary;
@@ -22,7 +20,7 @@ public class Employee {
                 '}';
     }
 
-    BigDecimal getAnnualSalary() {
+    Money getAnnualSalary() {
         return annualSalary;
     }
 }
