@@ -28,4 +28,27 @@ class MoneyShould {
         assertEquals(new Money(result), new Money(start).divide(divisor));
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "6,3,18",
+    })
+    void can_be_multiplied_by_a_number(BigDecimal start, double multiplicand, BigDecimal result) {
+        assertEquals(new Money(result), new Money(start).multiply(multiplicand));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "6,3,3",
+    })
+    void can_be_subtracted_by_a_number(BigDecimal start, double subtrahend, BigDecimal result) {
+        assertEquals(new Money(result), new Money(start).subtract(subtrahend));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "6,true",
+    })
+    void can_be_subtracted_by_a_number(double testValue, boolean result) {
+        assertEquals(result, new Money(testValue).isPositive());
+    }
 }

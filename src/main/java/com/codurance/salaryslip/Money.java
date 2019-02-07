@@ -5,18 +5,30 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money {
-    private BigDecimal value;
+    private BigDecimal moneyValue;
 
-    Money(double value) {
-        this(BigDecimal.valueOf(value));
+    Money(double moneyValue) {
+        this(BigDecimal.valueOf(moneyValue));
     }
 
-    Money(BigDecimal value) {
-        this.value = value.setScale(2, RoundingMode.CEILING);
+    Money(BigDecimal moneyValue) {
+        this.moneyValue = moneyValue.setScale(2, RoundingMode.CEILING);
     }
 
     Money divide(double divisor) {
-        return new Money(value.divide(BigDecimal.valueOf(divisor), RoundingMode.CEILING));
+        return new Money(moneyValue.divide(BigDecimal.valueOf(divisor), RoundingMode.CEILING));
+    }
+
+    public Money subtract(double value) {
+        return new Money(moneyValue.subtract(BigDecimal.valueOf(value)));
+    }
+
+    public Money multiply(double value) {
+        return new Money(moneyValue.multiply(BigDecimal.valueOf(value)));
+    }
+
+    public boolean isPositive() {
+        return this.moneyValue.compareTo(BigDecimal.ZERO) > 0;
     }
 
     @Override
@@ -24,18 +36,19 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return money.value.compareTo(value) == 0;
+        return money.moneyValue.compareTo(moneyValue) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(moneyValue);
     }
 
     @Override
     public String toString() {
         return "Money{" +
-                "value=" + value +
+                "moneyValue=" + moneyValue +
                 '}';
     }
+
 }

@@ -16,8 +16,21 @@ class SalaryCalculatorShould {
     void calculate_gross_salary_per_month_for_an_employee(int annualSalary, double expectedMonthlySalary) {
         SalaryCalculator calculator = new SalaryCalculator(new Money(annualSalary));
 
-        Money actualMonthlySalary = calculator.invoke();
+        Money actualMonthlySalary = calculator.calculateGrossMonthlySalary();
 
         assertEquals(new Money(expectedMonthlySalary), actualMonthlySalary);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "8424,0",
+            "20424, 1440",
+    })
+    void calculate_national_insurance_contributions_per_month_for_a_annual_salary(int annualSalary, double expectedNationalInsuranceContribution) {
+        SalaryCalculator calculator = new SalaryCalculator(new Money(annualSalary));
+
+        Money actualNationalInsuranceContribution = calculator.calculateNationalInsuranceContribution();
+
+        assertEquals(new Money(expectedNationalInsuranceContribution), actualNationalInsuranceContribution);
     }
 }

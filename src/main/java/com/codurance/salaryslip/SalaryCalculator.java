@@ -7,7 +7,13 @@ class SalaryCalculator {
         this.annualSalary = annualSalary;
     }
 
-    Money invoke() {
+    Money calculateGrossMonthlySalary() {
         return annualSalary.divide(12);
+    }
+
+    public Money calculateNationalInsuranceContribution() {
+        if(annualSalary.subtract(8424).isPositive())
+            return annualSalary.subtract(8424).multiply(0.12);
+        return new Money(0);
     }
 }

@@ -33,7 +33,7 @@ public class SalarySlip {
         return "SalarySlip{" +
                 "employee=" + employee +
                 ", monthlyGrossSalary=" + monthlyGrossSalary +
-                ", nationalInsuranceContribution=" + nationalInsuranceContribution +
+                ", nationalInsuranceContribution=" + nationalInsuranceContribution   +
                 '}';
     }
 }
