@@ -1,10 +1,16 @@
 package com.codurance.salaryslip;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-public class SalarySlipGenerator {
+class SalarySlipGenerator {
 
-    public SalarySlip generateFor(Employee employee) {
-        return new SalarySlip(employee, BigDecimal.valueOf(250));
+    SalarySlip generateFor(Employee employee) {
+        BigDecimal annualSalary = employee.getAnnualSalary();
+        return new SalarySlip(employee, getMonthlySalary(annualSalary));
+    }
+
+    private BigDecimal getMonthlySalary(BigDecimal annualSalary) {
+        return annualSalary.divide(BigDecimal.valueOf(12), RoundingMode.UNNECESSARY);
     }
 }

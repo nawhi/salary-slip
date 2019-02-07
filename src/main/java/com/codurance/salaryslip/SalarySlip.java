@@ -7,7 +7,7 @@ public class SalarySlip {
     private final Employee employee;
     private final BigDecimal monthlyGrossSalary;
 
-    public SalarySlip(Employee employee, BigDecimal monthlyGrossSalary) {
+    SalarySlip(Employee employee, BigDecimal monthlyGrossSalary) {
         this.employee = employee;
         this.monthlyGrossSalary = monthlyGrossSalary;
     }
@@ -23,5 +23,13 @@ public class SalarySlip {
     @Override
     public int hashCode() {
         return Objects.hash(employee, monthlyGrossSalary);
+    }
+
+    @Override
+    public String toString() {
+        return "SalarySlip{" +
+                "employee=" + employee +
+                ", monthlyGrossSalary=" + monthlyGrossSalary +
+                '}';
     }
 }
