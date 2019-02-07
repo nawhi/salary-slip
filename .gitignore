@@ -1,10 +1,6 @@
 .idea
-.gradle
 *.iml
 *.ipr
 *.iws
 out
 build
-gradle
-gradlew
-gradlew.bat
