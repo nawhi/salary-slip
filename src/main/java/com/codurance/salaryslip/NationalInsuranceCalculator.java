@@ -2,8 +2,10 @@ package com.codurance.salaryslip;
 
 class NationalInsuranceCalculator {
     static Money calculate(Money salary, Money lowerBound, double lowerRate, Money upperBound, double upperRate) {
-        if (isAboveNIBoundary(salary, upperBound))
-            return calculateBoundaryContributions(upperBound, lowerBound,lowerRate).add(calculateBoundaryContributions(salary, upperBound, upperRate));
+        if (isAboveNIBoundary(salary, upperBound)){
+            return calculateBoundaryContributions(upperBound, lowerBound,lowerRate)
+                    .add(calculateBoundaryContributions(salary, upperBound, upperRate));
+        }
         if (isAboveNIBoundary(salary, lowerBound)) {
             return calculateBoundaryContributions(salary, lowerBound, lowerRate);
         }
