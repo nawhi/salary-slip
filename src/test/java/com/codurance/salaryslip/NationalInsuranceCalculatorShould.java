@@ -31,9 +31,10 @@ class NationalInsuranceCalculatorShould {
         assertEquals(expectedContribution, contribution);
     }
 
-    static Stream<Arguments> lowerRateContribData() {
+    private static Stream<Arguments> lowerRateContribData() {
         return Stream.of(
-                Arguments.of(new Money(3000), new Money(2000), 0.1, new Money(100))
+                Arguments.of(new Money(3000), new Money(2000), 0.1, new Money(100)),
+                Arguments.of(new Money(6000), new Money(2000), 0.2, new Money(800))
         );
     }
 }
