@@ -7,6 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MoneyShould {
 
@@ -51,4 +53,15 @@ class MoneyShould {
     void can_be_subtracted_by_a_number(double testValue, boolean result) {
         assertEquals(result, new Money(testValue).isPositive());
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "2,1,true",
+            "1,2,false",
+            "1,1,false"
+    })
+    void can_be_greater_than_another_Money(int lvalue, int rvalue, boolean expectedResult) {
+        assertEquals(expectedResult, new Money(lvalue).isGreaterThan(new Money(rvalue)));
+    }
+
 }
