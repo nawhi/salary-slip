@@ -12,11 +12,11 @@ public class Money {
     }
 
     Money(BigDecimal moneyValue) {
-        this.moneyValue = moneyValue.setScale(2, RoundingMode.CEILING);
+        this.moneyValue = moneyValue.setScale(2, RoundingMode.HALF_UP);
     }
 
     Money divide(double divisor) {
-        return new Money(moneyValue.divide(BigDecimal.valueOf(divisor), RoundingMode.CEILING));
+        return new Money(moneyValue.divide(BigDecimal.valueOf(divisor), RoundingMode.HALF_UP));
     }
 
     Money subtract(Money value) {
@@ -36,7 +36,8 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return money.moneyValue.compareTo(moneyValue) == 0;
+        return money.moneyValue.setScale(2, RoundingMode.HALF_UP)
+                    .compareTo(moneyValue) == 0;
     }
 
     @Override

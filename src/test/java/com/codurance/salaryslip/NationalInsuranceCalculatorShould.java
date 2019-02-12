@@ -34,7 +34,11 @@ class NationalInsuranceCalculatorShould {
     private static Stream<Arguments> lowerRateContribData() {
         return Stream.of(
                 Arguments.of(new Money(3000), new Money(2000), 0.1, new Money(100)),
-                Arguments.of(new Money(6000), new Money(2000), 0.2, new Money(800))
+                Arguments.of(new Money(6000), new Money(2000), 0.2, new Money(800)),
+                Arguments.of(new Money(100.01), new Money(100), 0.1, new Money(0)),
+                Arguments.of(new Money(100.01), new Money(100), 0.5, new Money(0.01))
+
+
         );
     }
 }
