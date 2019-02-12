@@ -19,15 +19,15 @@ public class Money {
         return new Money(moneyValue.divide(BigDecimal.valueOf(divisor), RoundingMode.CEILING));
     }
 
-    public Money subtract(double value) {
-        return new Money(moneyValue.subtract(BigDecimal.valueOf(value)));
+    Money subtract(Money value) {
+        return new Money(moneyValue.subtract(value.moneyValue));
     }
 
-    public Money multiply(double value) {
+    Money multiply(double value) {
         return new Money(moneyValue.multiply(BigDecimal.valueOf(value)));
     }
 
-    public boolean isPositive() {
+    boolean isPositive() {
         return this.moneyValue.compareTo(BigDecimal.ZERO) > 0;
     }
 

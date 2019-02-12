@@ -41,7 +41,7 @@ class MoneyShould {
             "6,3,3",
     })
     void can_be_subtracted_by_a_number(BigDecimal start, double subtrahend, BigDecimal result) {
-        assertEquals(new Money(result), new Money(start).subtract(subtrahend));
+        assertEquals(new Money(result), new Money(start).subtract(new Money(subtrahend)));
     }
 
     @ParameterizedTest

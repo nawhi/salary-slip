@@ -24,7 +24,7 @@ class SalaryCalculatorShould {
     @ParameterizedTest
     @CsvSource({
             "8424,0",
-            "20424, 1440",
+            "20424, 1439.94",
     })
     void calculate_national_insurance_contributions_per_month_for_a_annual_salary(int annualSalary, double expectedNationalInsuranceContribution) {
         SalaryCalculator calculator = new SalaryCalculator(new Money(annualSalary));
