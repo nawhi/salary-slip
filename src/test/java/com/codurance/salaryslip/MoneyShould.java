@@ -64,4 +64,8 @@ class MoneyShould {
         assertEquals(expectedResult, new Money(lvalue).isGreaterThan(new Money(rvalue)));
     }
 
+    @Test
+    void can_be_added_with_a_Money() {
+        assertEquals(new Money(2), new Money(1).add(new Money(1)));
+    }
 }

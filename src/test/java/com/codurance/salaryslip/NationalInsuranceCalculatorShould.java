@@ -16,7 +16,7 @@ class NationalInsuranceCalculatorShould {
         Money contribution = NationalInsuranceCalculator.calculate(
                 new Money(5000),
                 new Money(6000),
-                0.1);
+                0.1, new Money(7000), 0.01);
         assertEquals(new Money(0), contribution);
     }
 
@@ -26,8 +26,8 @@ class NationalInsuranceCalculatorShould {
         Money contribution = NationalInsuranceCalculator.calculate(
                 salary,
                 lowerBound,
-                rate
-        );
+                rate,
+                new Money(10000), 0.01);
         assertEquals(expectedContribution, contribution);
     }
 
@@ -40,5 +40,17 @@ class NationalInsuranceCalculatorShould {
 
 
         );
+    }
+
+    @Test
+    void return_upper_rate_contribution_for_salary_above_upper_bound() {
+        Money salary = new Money(10000);
+        Money lowerBound = new Money(5000);
+        double lowerRate = 0.1;
+        Money upperBound = new Money(9000);
+        double upperRate = 0.01;
+        Money contribution = NationalInsuranceCalculator.calculate(salary, lowerBound, lowerRate, upperBound, upperRate);
+        double contributeCalculated = 4000 *0.1 + 1000 * 0.01;
+        assertEquals(new Money(contributeCalculated), contribution);
     }
 }

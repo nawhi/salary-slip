@@ -31,6 +31,14 @@ public class Money {
         return this.moneyValue.compareTo(BigDecimal.ZERO) > 0;
     }
 
+    boolean isGreaterThan(Money other) {
+        return moneyValue.compareTo(other.moneyValue) > 0;
+    }
+
+    public Money add(Money value) {
+        return new Money(moneyValue.add(value.moneyValue));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,9 +58,5 @@ public class Money {
         return "Money{" +
                 "moneyValue=" + moneyValue +
                 '}';
-    }
-
-    boolean isGreaterThan(Money other) {
-        return moneyValue.compareTo(other.moneyValue) > 0;
     }
 }
