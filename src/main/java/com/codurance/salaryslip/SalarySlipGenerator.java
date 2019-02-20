@@ -5,7 +5,9 @@ class SalarySlipGenerator {
     SalarySlip generateFor(Employee employee) {
         Money annualSalary = employee.getAnnualSalary();
         Money monthlyGrossSalary = new SalaryCalculator(annualSalary).calculateGrossMonthlySalary();
-        Money nationalInsuranceContribution = new SalaryCalculator(annualSalary).calculateNationalInsuranceContribution(new Money(162).multiply(52), 0.12);
+        Money weeklyLowerBoundThreshold = new Money(162);
+        double lowerBandNIRate = 0.12;
+        Money nationalInsuranceContribution = new SalaryCalculator(annualSalary).calculateNationalInsuranceContribution(weeklyLowerBoundThreshold, lowerBandNIRate);
         return new SalarySlip(employee, monthlyGrossSalary, nationalInsuranceContribution);
     }
 
