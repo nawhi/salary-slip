@@ -9,10 +9,15 @@ class SalarySlipGeneratorShould {
 
     @Test
     void calculate_gross_salary_per_month_for_an_employee() {
-        Employee employee = new Employee("Bill B Bronson", 67890, new Money(3000));
+        Money annualSalary = new Money(3000);
+        int id = 67890;
+        String bill_b_bronson = "Bill B Bronson";
+        Employee employee = new Employee(bill_b_bronson, id, annualSalary);
         SalarySlipGenerator salarySlipGenerator = new SalarySlipGenerator();
 
-        SalarySlip expectedSalarySlip  = new SalarySlip(employee, new Money(755.00), new Money(250));
+        Money expectedNiContribution = new Money(0);
+        Money expectedMonthlyGrossSalary = new Money(250);
+        SalarySlip expectedSalarySlip  = new SalarySlip(employee, expectedMonthlyGrossSalary, expectedNiContribution);
 
         MatcherAssert.assertThat(expectedSalarySlip, is(salarySlipGenerator.generateFor(employee)));
     }

@@ -4,7 +4,9 @@ class SalarySlipGenerator {
 
     SalarySlip generateFor(Employee employee) {
         Money annualSalary = employee.getAnnualSalary();
-        return new SalarySlip(employee, new Money(755.00), new SalaryCalculator(annualSalary).calculateGrossMonthlySalary());
+        Money monthlyGrossSalary = new SalaryCalculator(annualSalary).calculateGrossMonthlySalary();
+        Money nationalInsuranceContribution = new SalaryCalculator(annualSalary).calculateNationalInsuranceContribution(new Money(162).multiply(52), 0.12);
+        return new SalarySlip(employee, monthlyGrossSalary, nationalInsuranceContribution);
     }
 
 }
