@@ -1,6 +1,7 @@
 package com.codurance.salaryslip;
 
-import com.codurance.salaryslip.calculators.SalaryCalculator;
+import com.codurance.salaryslip.calculators.NationalInsuranceCalculator;
+import com.codurance.salaryslip.calculators.GrossMonthlySalaryCalculator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,12 +10,12 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SalaryCalculatorShould {
+class GrossMonthlySalaryCalculatorShould {
 
     @ParameterizedTest
     @MethodSource("grossSalaryData")
     void calculate_gross_salary_per_month_for_an_employee(Money annualSalary, Money expectedMonthlySalary) {
-        SalaryCalculator calculator = new SalaryCalculator(annualSalary);
+        GrossMonthlySalaryCalculator calculator = new GrossMonthlySalaryCalculator(annualSalary);
 
         Money actualMonthlySalary = calculator.calculateGrossMonthlySalary();
 
@@ -31,10 +32,10 @@ class SalaryCalculatorShould {
     @ParameterizedTest
     @MethodSource("niContributionData")
     void calculate_national_insurance_contributions_per_month_for_a_annual_salary(Money annualSalary, Money expectedNationalInsuranceContribution) {
-        SalaryCalculator calculator = new SalaryCalculator(annualSalary);
+        GrossMonthlySalaryCalculator calculator = new GrossMonthlySalaryCalculator(annualSalary);
 
         final Money lowerBandThresholdPerWeek = new Money(162.01);
-        Money actualNationalInsuranceContribution = calculator.calculateNationalInsuranceContribution(0.12, lowerBandThresholdPerWeek.multiply(52));
+        Money actualNationalInsuranceContribution = NationalInsuranceCalculator.calculate(calculator.annualSalary, lowerBandThresholdPerWeek.multiply(52), 0.12, GrossMonthlySalaryCalculator.UPPER_BOUND_THRESHOLD, GrossMonthlySalaryCalculator.UPPER_RATE);
 
         assertEquals(expectedNationalInsuranceContribution, actualNationalInsuranceContribution);
     }
