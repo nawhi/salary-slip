@@ -12,15 +12,7 @@ class SalaryCalculator {
         return annualSalary.divide(12);
     }
 
-    Money calculateNationalInsuranceContribution() {
-        return calculateNationalInsuranceContribution(new Money(162.01), 0.12);
-    }
-
     Money calculateNationalInsuranceContribution(Money lowerBandThresholdPerWeek, double lowerBandNIRate) {
-        Money lowerBandThresholdAnnual = lowerBandThresholdPerWeek.multiply(WEEKS_IN_A_YEAR);
-        if(annualSalary.subtract(lowerBandThresholdAnnual).isPositive()) {
-            return annualSalary.subtract(lowerBandThresholdAnnual).multiply(lowerBandNIRate);
-        }
-        return new Money(0);
+        return NationalInsuranceCalculator.calculate(this.annualSalary, lowerBandThresholdPerWeek.multiply(52), lowerBandNIRate, new Money(892).multiply(52), 0.02);
     }
 }
