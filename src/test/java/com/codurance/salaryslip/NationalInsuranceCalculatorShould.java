@@ -1,5 +1,6 @@
 package com.codurance.salaryslip;
 
+import com.codurance.salaryslip.calculators.NationalInsuranceCalculator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

@@ -1,5 +1,7 @@
 package com.codurance.salaryslip;
 
+import com.codurance.salaryslip.calculators.SalaryCalculator;
+
 class SalarySlipGenerator {
 
     SalarySlip generateFor(Employee employee) {
