@@ -33,7 +33,8 @@ class SalaryCalculatorShould {
     void calculate_national_insurance_contributions_per_month_for_a_annual_salary(Money annualSalary, Money expectedNationalInsuranceContribution) {
         SalaryCalculator calculator = new SalaryCalculator(annualSalary);
 
-        Money actualNationalInsuranceContribution = calculator.calculateNationalInsuranceContribution(new Money(162.01), 0.12);
+        final Money lowerBandThresholdPerWeek = new Money(162.01);
+        Money actualNationalInsuranceContribution = calculator.calculateNationalInsuranceContribution(0.12, lowerBandThresholdPerWeek.multiply(52));
 
         assertEquals(expectedNationalInsuranceContribution, actualNationalInsuranceContribution);
     }

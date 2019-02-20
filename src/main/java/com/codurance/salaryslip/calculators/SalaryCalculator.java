@@ -14,9 +14,9 @@ public class SalaryCalculator {
         return annualSalary.divide(12);
     }
 
-    public Money calculateNationalInsuranceContribution(Money lowerBandThresholdPerWeek, double lowerBandNIRate) {
-        Money weeklyUpperBoundThreshold = new Money(892);
+    public Money calculateNationalInsuranceContribution(double lowerRate, Money lowerBoundThreshold) {
         double upperRate = 0.02;
-        return NationalInsuranceCalculator.calculate(this.annualSalary, lowerBandThresholdPerWeek.multiply(52), lowerBandNIRate, weeklyUpperBoundThreshold.multiply(52), upperRate);
+        Money upperBoundThreshold = new Money(892).multiply(52);
+        return NationalInsuranceCalculator.calculate(this.annualSalary, lowerBoundThreshold, lowerRate, upperBoundThreshold, upperRate);
     }
 }
