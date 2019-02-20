@@ -29,21 +29,4 @@ class GrossMonthlySalaryCalculatorShould {
                 Arguments.of(new Money(5000),new Money(416.67))
         );
     }
-    @ParameterizedTest
-    @MethodSource("niContributionData")
-    void calculate_national_insurance_contributions_per_month_for_a_annual_salary(Money annualSalary, Money expectedNationalInsuranceContribution) {
-        GrossMonthlySalaryCalculator calculator = new GrossMonthlySalaryCalculator(annualSalary);
-
-        final Money lowerBandThresholdPerWeek = new Money(162.01);
-        Money actualNationalInsuranceContribution = NationalInsuranceCalculator.calculate(calculator.annualSalary, lowerBandThresholdPerWeek.multiply(52), 0.12, GrossMonthlySalaryCalculator.UPPER_BOUND_THRESHOLD, GrossMonthlySalaryCalculator.UPPER_RATE);
-
-        assertEquals(expectedNationalInsuranceContribution, actualNationalInsuranceContribution);
-    }
-
-    private static Stream<Arguments> niContributionData() {
-        return Stream.of(
-                Arguments.of(new Money(8424),new Money(0)),
-                Arguments.of(new Money(20424),new Money(1439.94))
-        );
-    }
 }
