@@ -5,7 +5,7 @@ import com.codurance.salaryslip.calculators.GrossMonthlySalaryCalculator;
 
 class SalarySlipGenerator {
 
-    private static final Money UPPER_BOUND_THRESHOLD = new Money(892).multiply(52);
+    private static final Money UPPER_BOUND_THRESHOLD = new Money(892 * 52);
     private static final double UPPER_RATE = 0.02;
     private static final Money LOWER_BOUND_THRESHOLD = new Money(162 * 52);
     private static final double LOWER_RATE = 0.12;
