@@ -15,9 +15,15 @@ class SalarySlipGenerator {
 
         Money weeklyLowerBoundThreshold = new Money(162);
         double lowerBandNIRate = 0.12;
-        Money nationalInsuranceContribution = NationalInsuranceCalculator.calculate(annualSalary, weeklyLowerBoundThreshold.multiply(52), lowerBandNIRate, UPPER_BOUND_THRESHOLD, UPPER_RATE);
 
-        return new SalarySlip(employee, monthlyGrossSalary, nationalInsuranceContribution);
+        NationalInsuranceCalculator calculator = new NationalInsuranceCalculator(
+                weeklyLowerBoundThreshold.multiply(52),
+                lowerBandNIRate,
+                UPPER_BOUND_THRESHOLD,
+                UPPER_RATE);
+
+        Money contribution = calculator.calculationFunction(annualSalary);
+        return new SalarySlip(employee, monthlyGrossSalary, contribution);
     }
 
 }
