@@ -18,7 +18,7 @@ class NationalInsuranceCalculatorShould {
                 new Money(6000), 0.1,
                 new Money(7000), 0.01
         );
-        Money contribution = nationalInsuranceCalculator.calculationFunction(new Money(5000));
+        Money contribution = nationalInsuranceCalculator.calculate(new Money(5000));
         assertEquals(new Money(0), contribution);
     }
 
@@ -31,7 +31,7 @@ class NationalInsuranceCalculatorShould {
                 new Money(10000),
                 0.01
         );
-        Money contribution = nationalInsuranceCalculator.calculationFunction(salary);
+        Money contribution = nationalInsuranceCalculator.calculate(salary);
         assertEquals(expectedContribution, contribution);
     }
 
@@ -59,7 +59,7 @@ class NationalInsuranceCalculatorShould {
                 upperBound,
                 upperRate
         );
-        Money contributionTemp = nationalInsuranceCalculator.calculationFunction(salary);
+        Money contributionTemp = nationalInsuranceCalculator.calculate(salary);
         double contributeCalculated = 4000 *0.1 + 1000 * 0.01;
         assertEquals(new Money(contributeCalculated), contributionTemp);
     }

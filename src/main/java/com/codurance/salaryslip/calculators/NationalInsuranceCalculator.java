@@ -15,13 +15,7 @@ public class NationalInsuranceCalculator {
         this.upperRate = upperRate;
     }
 
-    public static Money calculate(Money salary, Money lowerBound, double lowerRate, Money upperBound, double upperRate) {
-        NationalInsuranceCalculator niCalc = new NationalInsuranceCalculator(lowerBound, lowerRate, upperBound,
-                upperRate);
-        return niCalc.calculationFunction(salary);
-    }
-
-    public Money calculationFunction(Money salary) {
+    public Money calculate(Money salary) {
         if (isAboveNIBoundary(salary, upperBound)){
             return calculateBoundaryContributions(upperBound, lowerBound,lowerRate)
                     .add(calculateBoundaryContributions(salary, upperBound, upperRate));

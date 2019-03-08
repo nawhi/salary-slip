@@ -22,7 +22,7 @@ class SalarySlipGenerator {
                 UPPER_BOUND_THRESHOLD,
                 UPPER_RATE);
 
-        Money contribution = calculator.calculationFunction(annualSalary);
+        Money contribution = calculator.calculate(annualSalary);
         return new SalarySlip(employee, monthlyGrossSalary, contribution);
     }
 
