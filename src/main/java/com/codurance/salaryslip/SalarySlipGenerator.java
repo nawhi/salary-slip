@@ -5,10 +5,7 @@ import com.codurance.salaryslip.calculators.GrossMonthlySalaryCalculator;
 
 class SalarySlipGenerator {
 
-    private static final Money UPPER_BOUND_THRESHOLD = new Money(892 * 52);
-    private static final double UPPER_RATE = 0.02;
-    private static final Money LOWER_BOUND_THRESHOLD = new Money(162 * 52);
-    private static final double LOWER_RATE = 0.12;
+    private final NationalInsuranceRepository nationalInsuranceRepository = new NationalInsuranceRepository();
 
     SalarySlip generateFor(Employee employee) {
         Money annualSalary = employee.getAnnualSalary();
@@ -16,10 +13,10 @@ class SalarySlipGenerator {
         Money monthlyGrossSalary = new GrossMonthlySalaryCalculator(annualSalary).calculateGrossMonthlySalary();
 
         NationalInsuranceCalculator calculator = new NationalInsuranceCalculator(
-                LOWER_BOUND_THRESHOLD,
-                LOWER_RATE,
-                UPPER_BOUND_THRESHOLD,
-                UPPER_RATE);
+                nationalInsuranceRepository.getLowerBoundThreshold(),
+                nationalInsuranceRepository.getLowerRate(),
+                nationalInsuranceRepository.getUpperBoundThreshold(),
+                nationalInsuranceRepository.getUpperRate());
 
         Money contribution = calculator.calculate(annualSalary);
         return new SalarySlip(employee, monthlyGrossSalary, contribution);
